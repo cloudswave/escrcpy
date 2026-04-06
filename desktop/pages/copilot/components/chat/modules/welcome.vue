@@ -11,7 +11,7 @@
       </div>
 
       <div class="mt-6 text-2xl font-bold text-gray-900 dark:text-white">
-        {{ $t('copilot.welcome.title', { name: 'Escrcpy Copilot' }) }}
+        {{ $t('copilot.welcome.title', { name: 'DroidMirror Copilot' }) }}
       </div>
       <div class="mt-2 text-sm text-gray-500 dark:text-gray-400 max-w-md space-y-2">
         <div class="">

@@ -4,7 +4,7 @@
       class="flex flex-col h-screen"
     >
       <AppHeader
-        title="Escrcpy Copilot"
+        title="DroidMirror Copilot"
         :device-name="deviceLabel"
         class="px-2 pb-2"
       >

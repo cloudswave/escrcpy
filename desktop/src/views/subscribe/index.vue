@@ -1,32 +1,6 @@
 <template>
   <div class="h-full flex flex-col overflow-hidden">
-    <div class="flex-none flex items-center">
-      <div class="flex-1 min-w-0">
-        <el-segmented v-model="activeTab" class="el-segmented--child" :options="tabsModel">
-          <template #default="{ item }">
-            <div class="text-sm lg:text-base">
-              {{ $t(item.label) }}
-            </div>
-          </template>
-        </el-segmented>
-      </div>
-
-      <div class="flex-none">
-        <UserProfile @login="onLoginClick" @logout="onLogoutClick" />
-      </div>
-    </div>
-
-    <div class="flex-1 min-h-0 overflow-auto">
-      <component :is="tabComponents[activeTab]" @purchase="onPurchaseClick" />
-    </div>
-
-    <PaymentDialog
-      ref="paymentDialogRef"
-    />
-
-    <LoginDialog
-      ref="loginDialogRef"
-    />
+    更多功能定制请联系微信公众号：搞机Geek
   </div>
 </template>
 

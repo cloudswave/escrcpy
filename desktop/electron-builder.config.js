@@ -1,7 +1,7 @@
 /** @type {import('electron-builder').Configuration} */
 export default {
-  productName: 'Escrcpy',
-  appId: 'org.viarotel.escrcpy',
+  productName: 'DroidMirrior',
+  appId: 'org.ethan.droidmirror',
 
   directories: {
     output: 'dist-release',

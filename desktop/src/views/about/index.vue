@@ -9,39 +9,8 @@
         {{ $t("about.description") }}
       </div>
 
-      <div class="pt-[4vh]">
-        <el-button
-          :loading="loading"
-          type="primary"
-          :size="$grid.lg ? 'large' : 'default'"
-          @click="handleUpdate"
-        >
-          {{
-            loading && percent
-              ? `${$t("about.update.progress")}...（${percent.toFixed(1)}%）`
-              : $t("about.update")
-          }}
-        </el-button>
-
-        <el-button :size="$grid.lg ? 'large' : 'default'" class="group" @click="onDocsClick">
-          <span class="pl-1">{{ $t('about.docs.name') }}</span>
-        </el-button>
-
-        <el-button :size="$grid.lg ? 'large' : 'default'" class="group" @click="onDonateClick">
-          <span class="group-hover:animate-rubber-band text-red-500">♥</span>
-          <span class="pl-1">{{ $t('about.donate.title') }}</span>
-        </el-button>
-      </div>
-
       <div class="text-sm">
-        Supported by
-
-        <a
-          class="hover:underline text-primary-500"
-          href="https://viarotel.github.io/"
-          target="_blank"
-        >Viarotel</a>
-
+        Supported by 搞机玩家
         v{{ version }}
       </div>
     </div>
