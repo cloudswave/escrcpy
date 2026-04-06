@@ -49,19 +49,120 @@ jobs:
       - name: Build ${{ matrix.platform }}
         run: pnpm ${{ matrix.build_command }}
 
-      - name: Upload artifacts
+      # ==============================================
+      # 🔥 精确匹配：每个文件 独立上传
+      # ==============================================
+
+      # --------------------------
+      # Linux 架构独立上传
+      # --------------------------
+      - name: Upload Linux x86_64 deb
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.platform }}-artifacts
-          path: |
-            desktop/dist-release/*.exe
-            desktop/dist-release/*.zip
-            desktop/dist-release/*.dmg
-            desktop/dist-release/*.AppImage
-            desktop/dist-release/*.flatpak
-            desktop/dist-release/*.snap
-            desktop/dist-release/*.deb
-            desktop/dist-release/*.rpm
-            desktop/dist-release/*.tar.gz
-            desktop/dist-release/*.blockmap
-            desktop/dist-release/latest*.yml
+          name: ${{ matrix.platform }}-x86_64-deb
+          path: desktop/dist-release/*linux-x86_64.deb
+          if-no-files-found: ignore
+
+      - name: Upload Linux arm64 deb
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-deb
+          path: desktop/dist-release/*linux-arm64.deb
+          if-no-files-found: ignore
+
+      - name: Upload Linux x86_64 AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x86_64-appimage
+          path: desktop/dist-release/*linux-x86_64.AppImage
+          if-no-files-found: ignore
+
+      - name: Upload Linux arm64 AppImage
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-appimage
+          path: desktop/dist-release/*linux-arm64.AppImage
+          if-no-files-found: ignore
+
+      - name: Upload Linux x86_64 flatpak
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x86_64-flatpak
+          path: desktop/dist-release/*linux-x86_64.flatpak
+          if-no-files-found: ignore
+
+      # --------------------------
+      # Mac 架构独立上传
+      # --------------------------
+      - name: Upload Mac x64 dmg
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x64-dmg
+          path: desktop/dist-release/*mac-x64.dmg
+          if-no-files-found: ignore
+
+      - name: Upload Mac arm64 dmg
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-dmg
+          path: desktop/dist-release/*mac-arm64.dmg
+          if-no-files-found: ignore
+
+      - name: Upload Mac x64 zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x64-zip
+          path: desktop/dist-release/*mac-x64.zip
+          if-no-files-found: ignore
+
+      - name: Upload Mac arm64 zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-zip
+          path: desktop/dist-release/*mac-arm64.zip
+          if-no-files-found: ignore
+
+      # --------------------------
+      # Windows 架构独立上传
+      # --------------------------
+      - name: Upload Windows x64 setup
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x64-setup
+          path: desktop/dist-release/*-win-setup-x64.exe
+          if-no-files-found: ignore
+
+      - name: Upload Windows arm64 setup
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-setup
+          path: desktop/dist-release/*-win-setup-arm64.exe
+          if-no-files-found: ignore
+
+      - name: Upload Windows x64 portable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x64-portable
+          path: desktop/dist-release/*-win-portable-x64.exe
+          if-no-files-found: ignore
+
+      - name: Upload Windows arm64 portable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-portable
+          path: desktop/dist-release/*-win-portable-arm64.exe
+          if-no-files-found: ignore
+
+      - name: Upload Windows x64 zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-x64-zip
+          path: desktop/dist-release/*win-x64.zip
+          if-no-files-found: ignore
+
+      - name: Upload Windows arm64 zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.platform }}-arm64-zip
+          path: desktop/dist-release/*win-arm64.zip
+          if-no-files-found: ignore
