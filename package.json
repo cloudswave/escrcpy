@@ -26,6 +26,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "6.7.3",
+    "electron": "33.0.2",
     "eslint": "9.39.2",
     "eslint-plugin-format": "1.2.0",
     "husky": "9.0.11",
