@@ -840,5 +840,8 @@
   "time.unit.second": "ثانية",
   "time.unit.week": "أسبوع",
   "time.unit.year": "سنة",
-  "time.update": "وقت التحديث"
+  "time.update": "وقت التحديث",
+  "device.viewMode.grid": "عرض الشبكة",
+  "device.viewMode.list": "عرض القائمة",
+  "device.viewMode.columns": "الأعمدة"
 }

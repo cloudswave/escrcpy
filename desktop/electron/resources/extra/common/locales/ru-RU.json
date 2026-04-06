@@ -840,5 +840,8 @@
   "time.unit.second": "секунда",
   "time.unit.week": "неделя",
   "time.unit.year": "год",
-  "time.update": "Время обновления"
+  "time.update": "Время обновления",
+  "device.viewMode.grid": "Сетка",
+  "device.viewMode.list": "Список",
+  "device.viewMode.columns": "Колонки"
 }

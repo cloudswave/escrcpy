@@ -840,5 +840,8 @@
   "time.unit.second": "second",
   "time.unit.week": "week",
   "time.unit.year": "year",
-  "time.update": "Update time"
+  "time.update": "Update time",
+  "device.viewMode.grid": "Grid View",
+  "device.viewMode.list": "List View",
+  "device.viewMode.columns": "Columns"
 }

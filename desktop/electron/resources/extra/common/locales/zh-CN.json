@@ -840,5 +840,8 @@
   "time.unit.second": "秒",
   "time.unit.week": "周",
   "time.unit.year": "年",
-  "time.update": "更新时间"
+  "time.update": "更新时间",
+  "device.viewMode.grid": "宫格模式",
+  "device.viewMode.list": "列表模式",
+  "device.viewMode.columns": "列数"
 }
