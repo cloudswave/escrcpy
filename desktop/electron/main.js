@@ -20,6 +20,7 @@ import {
   sandboxPlugin,
   themePlugin,
   windowIPCPlugin,
+  authorizationPlugin,
 } from '@escrcpy/electron-setup/plugins'
 
 import { browserWindowHeight, browserWindowWidth, getLogoPath } from './configs/index.js'
@@ -60,11 +61,10 @@ const mainApp = createElectronApp({
 mainApp.use(sandboxPlugin)
 mainApp.use(mainModule)
 mainApp.use(lifecycleService)
-
 mainApp.use(themePlugin)
 mainApp.use(windowIPCPlugin)
 mainApp.use(clipboardPlugin)
-
+mainApp.use(authorizationPlugin)
 mainApp.use(edgerService)
 mainApp.use(listenersService)
 mainApp.use(handlesService)
@@ -73,7 +73,6 @@ mainApp.use(contextMenuService)
 mainApp.use(updaterService)
 mainApp.use(launchService)
 mainApp.use(shortcutsService)
-
 mainApp.use(controlModule)
 mainApp.use(copilotModule)
 mainApp.use(explorerModule)

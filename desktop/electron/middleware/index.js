@@ -1,11 +1,8 @@
-import { contextBridge, webUtils } from 'electron'
+import { contextBridge, webUtils, ipcRenderer } from 'electron'
 import '$electron/helpers/debugger/renderer.js'
-
 import { electronAPI } from '@electron-toolkit/preload'
 import { ipcxRenderer } from '@escrcpy/electron-ipcx/renderer'
-
 import * as configs from '$electron/configs/index.js'
-
 import useLoading from './loading/index.js'
 import path from 'node:path'
 import payload from './payload/index.js'
@@ -21,7 +18,6 @@ import terminal from './terminal/index.js'
 
 export function createMiddleware() {
   adb.init()
-
   useLoading()
 
   defineMiddleware('$preload', {
@@ -38,6 +34,9 @@ export function createMiddleware() {
     win,
     configs,
     getPathForFile: file => webUtils.getPathForFile(file),
+    // Authorization APIs
+    verifyAuthorization: (licenseKey) => ipcRenderer.invoke('verify-authorization', licenseKey),
+    checkAuthorizationStatus: () => ipcRenderer.invoke('check-authorization-status'),
     ...electronAPI,
     ipcxRenderer,
   })
@@ -47,12 +46,10 @@ export function defineMiddleware(key, value) {
   if (process.contextIsolated) {
     try {
       contextBridge.exposeInMainWorld(key, value)
-    }
-    catch (error) {
+    } catch (error) {
       console.error(error)
     }
-  }
-  else {
+  } else {
     window[key] = value
   }
 }

@@ -19,3 +19,7 @@ export type { ThemePluginAPI, ThemePluginOptions } from './theme/index.js'
 // Window IPC plugin
 export { windowIPCPlugin } from './window-ipc/index.js'
 export type { WindowIPCPluginOptions } from './window-ipc/index.js'
+
+// Authorization plugin
+export { authorizationPlugin } from './authorization/index.js'
+export type { AuthorizationPluginAPI, AuthorizationPluginOptions } from './authorization/index.js'
