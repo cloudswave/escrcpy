@@ -3,6 +3,7 @@ import fs from 'fs-extra'
 import path from 'node:path'
 import { openLogPath } from '$root/electron/helpers/debugger/index.js'
 import { isWindowDestroyed } from '$electron/helpers/index.js'
+import { verifyAuthorization, checkAuthorizationStatus } from '$electron/helpers/auth.js'
 
 export default {
   name: 'service:handles',
@@ -187,6 +188,29 @@ export default {
       return data.token
     })
 
+    // Authorization handlers
+    ipcMain.handle('verify-authorization', async (_, licenseKey) => {
+      try {
+        const result = await verifyAuthorization(licenseKey)
+        return { success: true, data: result }
+      }
+      catch (error) {
+        console.error('IPC verify-authorization error:', error.message)
+        return { success: false, message: error.message }
+      }
+    })
+
+    ipcMain.handle('check-authorization-status', async () => {
+      try {
+        const status = await checkAuthorizationStatus()
+        return { success: true, data: status }
+      }
+      catch (error) {
+        console.error('IPC check-authorization-status error:', error.message)
+        return { success: false, message: error.message }
+      }
+    })
+
     ipcMain.handle('open-system-menu', (event, args = {}) => {
       const win = BrowserWindow.fromWebContents(event.sender)
 
@@ -233,6 +257,8 @@ export default {
       ipcMain.removeHandler('navigate-to-route')
       ipcMain.removeHandler('open-log-path')
       ipcMain.removeHandler('get-gitee-temporary-token')
+      ipcMain.removeHandler('verify-authorization')
+      ipcMain.removeHandler('check-authorization-status')
       ipcMain.removeHandler('open-system-menu')
     }
   },

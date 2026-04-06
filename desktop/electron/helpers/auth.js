@@ -2,7 +2,7 @@ import { createHmac } from 'crypto';
 import { networkInterfaces } from 'os';
 import path from 'node:path';
 import fs from 'node:fs';
-import { app, ipcMain } from 'electron';
+import { app } from 'electron';
 
 const SALT_KEY = 'escrcpy-salt-key-2024';
 
@@ -130,14 +130,4 @@ export async function checkAuthorizationStatus() {
   }
 
   return verifySignature(auth.machine_code, auth.license_key, auth.signature);
-}
-
-export function setupAuthCommands(ipcMain) {
-  ipcMain.handle('verify-authorization', async (event, licenseKey) => {
-    return await verifyAuthorization(licenseKey);
-  });
-
-  ipcMain.handle('check-authorization-status', async () => {
-    return await checkAuthorizationStatus();
-  });
 }

@@ -20,7 +20,6 @@ import {
   sandboxPlugin,
   themePlugin,
   windowIPCPlugin,
-  authorizationPlugin,
 } from '@escrcpy/electron-setup/plugins'
 
 import { browserWindowHeight, browserWindowWidth, getLogoPath } from './configs/index.js'
@@ -64,7 +63,6 @@ mainApp.use(lifecycleService)
 mainApp.use(themePlugin)
 mainApp.use(windowIPCPlugin)
 mainApp.use(clipboardPlugin)
-mainApp.use(authorizationPlugin)
 mainApp.use(edgerService)
 mainApp.use(listenersService)
 mainApp.use(handlesService)
