@@ -17,7 +17,7 @@
         <template v-if="viewMode === 'grid'">
           <el-divider direction="vertical" />
           <span class="text-xs text-[--el-text-color-secondary]">{{ $t('device.viewMode.columns') }}</span>
-          <el-slider v-model="gridColumns" :min="2" :max="6" :step="1" :show-tooltip="false" class="!w-20" />
+          <el-slider v-model="gridColumns" :min="3" :max="12" :step="1" :show-tooltip="false" class="!w-20" />
           <span class="text-xs text-[--el-text-color-secondary] w-4">{{ gridColumns }}</span>
         </template>
       </div>
@@ -98,6 +98,7 @@
 </template>
 
 <script setup>
+import { h } from 'vue'
 import { sleep } from '$/utils/index.js'
 import { uniqBy } from 'lodash-es'
 import AppEmpty from '$/components/app-empty/index.vue'
@@ -276,8 +277,129 @@ async function handleCardCommand(command, row) {
         ElMessage.warning(error.message)
       }
     }
+  } else if (command === 'screenshot') {
+    // 截屏
+    window.$preload.adb.getScreenshot(targetRow.id)
+  } else if (command === 'install') {
+    // 安装APK
+    try {
+      const files = await window.$preload.ipcRenderer.invoke('show-open-dialog', {
+        properties: ['openFile', 'multiSelections'],
+        filters: [
+          {
+            name: $t('device.control.install.placeholder'),
+            extensions: ['apk'],
+          },
+        ],
+      })
+      if (!files?.length) return
+      
+      const loadingMsg = ElMessage({
+        message: $t('device.control.install.progress', { deviceName: deviceStore.getLabel(targetRow) }),
+        type: 'info',
+        duration: 0,
+      })
+      
+      let failCount = 0
+      for (const file of files) {
+        try {
+          await window.$preload.adb.install(targetRow.id, file)
+        } catch (e) {
+          console.warn(e)
+          ++failCount
+        }
+      }
+      
+      loadingMsg.close()
+      
+      const totalCount = files.length
+      const successCount = totalCount - failCount
+      
+      if (successCount) {
+        if (totalCount > 1) {
+          ElMessage.success($t('device.control.install.success', {
+            deviceName: deviceStore.getLabel(targetRow),
+            totalCount,
+            successCount,
+            failCount,
+          }))
+        } else {
+          ElMessage.success($t('device.control.install.success.single', {
+            deviceName: deviceStore.getLabel(targetRow),
+          }))
+        }
+      } else {
+        ElMessage.warning($t('device.control.install.error'))
+      }
+    } catch (error) {
+      console.error('install.error', error)
+    }
+  } else if (command === 'explorer') {
+    // 文件管理
+    window.$preload.win.open('pages/explorer', {
+      device: targetRow,
+      instanceId: targetRow.id,
+    })
+  } else if (command === 'terminal') {
+    // 终端
+    window.$preload.win.open('pages/terminal', {
+      title: 'terminal.command.name',
+      type: 'device',
+      device: targetRow,
+      instanceId: targetRow.id,
+    })
+  } else if (command === 'reboot') {
+    // 重启
+    await window.$preload.adb.deviceShell(targetRow.id, 'reboot')
+    ElMessage.success($t('device.control.reboot.success'))
+  } else if (command === 'rotation') {
+    // 旋转 - 显示旋转选项菜单
+    ElMessageBox.confirm('', {
+      title: $t('device.control.rotation.name'),
+      message: h('div', {}, [
+        h('el-radio-group', { modelValue: 'vertically', onChange: async (val) => {
+          await window.$preload.adb.deviceShell(targetRow.id, 'content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0')
+          ElMessage.success($t('device.control.rotation.vertically') + ' OK')
+        }}, [
+          h('el-radio-button', { value: 'vertically' }, $t('device.control.rotation.vertically'))
+        ])
+      ]),
+      confirmButtonText: $t('device.control.rotation.vertically'),
+      cancelButtonText: $t('device.control.rotation.horizontally'),
+    }).then(async () => {
+      // 纵向
+      await window.$preload.adb.deviceShell(targetRow.id, 'content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:0')
+      ElMessage.success($t('device.control.rotation.vertically') + ' OK')
+    }).catch(async () => {
+      // 横向
+      await window.$preload.adb.deviceShell(targetRow.id, 'content insert --uri content://settings/system --bind name:s:user_rotation --bind value:i:1')
+      ElMessage.success($t('device.control.rotation.horizontally') + ' OK')
+    })
+  } else if (command === 'volume') {
+    // 音量控制 - 显示音量选项菜单
+    const volumeOptions = [
+      { label: $t('device.control.volume-up.name'), command: 'input keyevent 24' },
+      { label: $t('device.control.volume-down.name'), command: 'input keyevent 25' },
+      { label: $t('device.control.volume-mute.name'), command: 'input keyevent 164' },
+    ]
+    const buttons = volumeOptions.map(opt => 
+      h('el-button', { onClick: async () => {
+        await window.$preload.adb.deviceShell(targetRow.id, opt.command)
+      }}, opt.label)
+    )
+    ElMessageBox({
+      title: $t('device.control.volume.name'),
+      message: h('div', { class: 'flex gap-2 flex-wrap' }, buttons),
+      showCancelButton: false,
+      confirmButtonText: $t('common.close'),
+    })
+  } else if (command === 'copilot') {
+    // AI助手
+    window.$preload.win.open('pages/copilot', {
+      device: targetRow,
+      instanceId: targetRow.id,
+    })
   }
-  // 其他命令可以后续扩展
 }
 
 let unAdbWatch = null

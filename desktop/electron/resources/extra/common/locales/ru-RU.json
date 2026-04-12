@@ -1,5 +1,5 @@
 {
-  "about.description": "📱 Отображайте и управляйте своим Android-устройством с помощью scrcpy в графическом режиме, созданный на базе Electron.",
+  "about.description": "📱 Дни повторяются, но счастье может быть новым.",
   "about.docs.name": "Документация",
   "about.donate.description": "Если этот проект помог вам, вы можете угостить меня кофе, чтобы у меня было больше энергии для его улучшения 😛",
   "about.donate.title": "Пожертвование",
@@ -843,5 +843,17 @@
   "time.update": "Время обновления",
   "device.viewMode.grid": "Сетка",
   "device.viewMode.list": "Список",
-  "device.viewMode.columns": "Колонки"
+  "device.viewMode.columns": "Колонки",
+  "about.supported-by": "Supported by GaojiGeek",
+  "authorization.title": "Авторизация ПО",
+  "authorization.description": "Для первого использования требуется активация, введите код авторизации",
+  "authorization.hint": "Подпишитесь на официальный аккаунт WeChat: GaojiGeek, чтобы получить код авторизации",
+  "authorization.input.placeholder": "Введите код авторизации",
+  "authorization.verifying": "Проверка...",
+  "authorization.verify": "Проверить код авторизации",
+  "authorization.error.empty": "Введите код авторизации",
+  "authorization.error.failed": "Авторизация не удалась",
+  "authorization.error.retry": "Авторизация не удалась, попробуйте снова",
+  "device.control.reboot.success": "Устройство перезагружено",
+  "subscribe.tab-plans.contact": "Для дополнительной настройки свяжитесь через официальный аккаунт WeChat: GaojiGeek"
 }

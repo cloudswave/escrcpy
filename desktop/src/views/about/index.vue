@@ -10,7 +10,7 @@
       </div>
 
       <div class="text-sm">
-        Supported by 搞机玩家
+        {{ $t('about.supported-by') }}
         v{{ version }}
       </div>
     </div>

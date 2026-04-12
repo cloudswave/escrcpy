@@ -1,5 +1,5 @@
 {
-  "about.description": "📱 Scrcpy は Android デバイスをグラフィカルに表示とコントロールを行います。Powered by Electron",
+  "about.description": "📱 日々は繰り返しでも、幸せは新しくできる。",
   "about.docs.name": "ヘルプドキュメント",
   "about.donate.description": "このプロジェクトがお役に立てたのであれば、私にコーヒーをご馳走して改善へのエネルギーをください 😛",
   "about.donate.title": "寄付",
@@ -840,5 +840,17 @@
   "time.unit.second": "秒",
   "time.unit.week": "週間",
   "time.unit.year": "年",
-  "time.update": "更新時間"
+  "time.update": "更新時間",
+  "about.supported-by": "Supported by GaojiGeek",
+  "authorization.title": "ソフトウェア認証",
+  "authorization.description": "初回使用時にはアクティベーションが必要です。認証コードを入力してください",
+  "authorization.hint": "WeChat公式アカウント: GaojiGeek をフォローして認証コードを取得してください",
+  "authorization.input.placeholder": "認証コードを入力してください",
+  "authorization.verifying": "検証中...",
+  "authorization.verify": "認証コードを検証",
+  "authorization.error.empty": "認証コードを入力してください",
+  "authorization.error.failed": "認証に失敗しました",
+  "authorization.error.retry": "認証に失敗しました。再試行してください",
+  "device.control.reboot.success": "デバイスが再起動されました",
+  "subscribe.tab-plans.contact": "カスタマイズについては、WeChat公式アカウント: GaojiGeek にお問い合わせください"
 }

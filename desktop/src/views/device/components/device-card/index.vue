@@ -5,7 +5,7 @@
     @click="handleClick"
   >
     <!-- 设备预览图 -->
-    <div class="device-preview relative aspect-video bg-[--el-bg-color-page]">
+    <div class="device-preview relative aspect-[9/16] bg-[--el-bg-color-page]">
       <img
         v-if="previewImage"
         :src="previewImage"
@@ -57,6 +57,18 @@
               <el-icon><Setting /></el-icon>
               {{ $t('device.actions.more.custom.name') }}
             </el-dropdown-item>
+            <el-dropdown-item command="install" divided>
+              <el-icon><FolderAdd /></el-icon>
+              {{ $t('device.control.install') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="explorer">
+              <el-icon><FolderOpened /></el-icon>
+              {{ $t('device.control.file.name') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="terminal">
+              <el-icon><Monitor /></el-icon>
+              {{ $t('device.terminal.name') }}
+            </el-dropdown-item>
             <el-dropdown-item command="camera" divided>
               <el-icon><VideoPlay /></el-icon>
               {{ $t('device.actions.more.camera.name') }}
@@ -64,6 +76,22 @@
             <el-dropdown-item command="otg">
               <el-icon><Connection /></el-icon>
               {{ $t('device.actions.more.otg.name') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="reboot" divided>
+              <el-icon><RefreshRight /></el-icon>
+              {{ $t('device.control.reboot') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="rotation">
+              <el-icon><Refresh /></el-icon>
+              {{ $t('device.control.rotation.name') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="volume">
+              <el-icon><Microphone /></el-icon>
+              {{ $t('device.control.volume.name') }}
+            </el-dropdown-item>
+            <el-dropdown-item command="copilot" divided>
+              <el-icon><ChatDotRound /></el-icon>
+              {{ $t('device.control.copilot') }}
             </el-dropdown-item>
           </el-dropdown-menu>
         </template>

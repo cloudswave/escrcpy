@@ -1,5 +1,15 @@
 {
-  "about.description": "📱 Display and control your Android device graphically with scrcpy, devices powered by Electron.",
+  "about.description": "📱 Days are repetitive, but happiness can be new.",
+  "about.supported-by": "Supported by GaojiGeek",
+  "authorization.title": "Software Authorization",
+  "authorization.description": "First use requires activation, please enter the authorization code",
+  "authorization.hint": "Follow WeChat Official Account: GaojiGeek to get the authorization code",
+  "authorization.input.placeholder": "Please enter authorization code",
+  "authorization.verifying": "Verifying...",
+  "authorization.verify": "Verify Authorization Code",
+  "authorization.error.empty": "Please enter authorization code",
+  "authorization.error.failed": "Authorization failed",
+  "authorization.error.retry": "Authorization failed, please retry",
   "about.docs.name": "Help Docs",
   "about.donate.description": "If this project has helped you, you can buy me a coffee to keep me energized to improve it 😛",
   "about.donate.title": "Donate",
@@ -843,5 +853,7 @@
   "time.update": "Update time",
   "device.viewMode.grid": "Grid View",
   "device.viewMode.list": "List View",
-  "device.viewMode.columns": "Columns"
+  "device.viewMode.columns": "Columns",
+  "device.control.reboot.success": "Device rebooted",
+  "subscribe.tab-plans.contact": "For more customization, please contact WeChat Official Account: GaojiGeek"
 }

@@ -1,5 +1,5 @@
 {
-  "about.description": "📱 عرض جهاز الأندرويد الخاص بك والتحكم فيه بشكل مرئي باستخدام scrcpy، من خلال الأجهزة التي تدعم تقنية Electron.",
+  "about.description": "📱 الأيام تتكرر، لكن السعادة يمكن أن تكون جديدة.",
   "about.docs.name": "وثائق المساعدة",
   "about.donate.description": "إذا كان المشروع ذا فائدة لك، يمكنك أن تدعمني بشراء قهوة لتبقيني متحفزًا لتحسينه 😛",
   "about.donate.title": "التبرع",
@@ -843,5 +843,17 @@
   "time.update": "وقت التحديث",
   "device.viewMode.grid": "عرض الشبكة",
   "device.viewMode.list": "عرض القائمة",
-  "device.viewMode.columns": "الأعمدة"
+  "device.viewMode.columns": "الأعمدة",
+  "about.supported-by": "Supported by GaojiGeek",
+  "authorization.title": "ترخيص البرنامج",
+  "authorization.description": "يتطلب الاستخدام الأول التفعيل، يرجى إدخال رمز الترخيص",
+  "authorization.hint": "تابع حساب WeChat الرسمي: GaojiGeek للحصول على رمز الترخيص",
+  "authorization.input.placeholder": "يرجى إدخال رمز الترخيص",
+  "authorization.verifying": "جارٍ التحقق...",
+  "authorization.verify": "التحقق من رمز الترخيص",
+  "authorization.error.empty": "يرجى إدخال رمز الترخيص",
+  "authorization.error.failed": "فشل الترخيص",
+  "authorization.error.retry": "فشل الترخيص، يرجى إعادة المحاولة",
+  "device.control.reboot.success": "تمت إعادة تشغيل الجهاز",
+  "subscribe.tab-plans.contact": "لمزيد من التخصيص، يرجى التواصل عبر حساب WeChat الرسمي: GaojiGeek"
 }

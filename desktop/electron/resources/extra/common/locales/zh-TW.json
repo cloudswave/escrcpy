@@ -1,5 +1,5 @@
 {
-  "about.description": "📱 使用圖形化的 Scrcpy 顯示和控制您的 Android 裝置，使用 Electron 開發",
+  "about.description": "📱 日子是重複的，但快樂可以是新的。",
   "about.docs.name": "幫助文件",
   "about.donate.description": "如果覺得這個專案有幫到您的話，可以考慮請我喝杯咖啡，讓我更有精神持續改進此專案 😛",
   "about.donate.title": "捐贈",
@@ -843,5 +843,17 @@
   "time.update": "更新時間",
   "device.viewMode.grid": "宮格模式",
   "device.viewMode.list": "列表模式",
-  "device.viewMode.columns": "列數"
+  "device.viewMode.columns": "列數",
+  "about.supported-by": "Supported by 搞機玩家",
+  "authorization.title": "軟體授權",
+  "authorization.description": "首次使用需要授權啟用，請輸入授權碼",
+  "authorization.hint": "可關注微信公眾號: 搞機Geek 獲取授權碼",
+  "authorization.input.placeholder": "請輸入授權碼",
+  "authorization.verifying": "驗證中...",
+  "authorization.verify": "驗證授權碼",
+  "authorization.error.empty": "請輸入授權碼",
+  "authorization.error.failed": "授權失敗",
+  "authorization.error.retry": "授權失敗，請重試",
+  "device.control.reboot.success": "裝置已重新啟動",
+  "subscribe.tab-plans.contact": "更多功能定制請聯繫微信公眾號：搞機Geek"
 }

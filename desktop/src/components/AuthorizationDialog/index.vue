@@ -1,18 +1,18 @@
 <template>
   <el-dialog
     v-model="visible"
-    title="软件授权"
+    :title="$t('authorization.title')"
     width="400px"
     :close-on-click-modal="false"
     :show-close="false"
   >
     <div class="auth-dialog-content">
-      <p class="description">首次使用需要授权激活，请输入授权码</p>
-      <p class="hint">可关注微信公众号: 搞机Geek 获取授权码</p>
+      <p class="description">{{ $t('authorization.description') }}</p>
+      <p class="hint">{{ $t('authorization.hint') }}</p>
       
       <el-input
         v-model="licenseKey"
-        placeholder="请输入授权码"
+        :placeholder="$t('authorization.input.placeholder')"
         :disabled="isVerifying"
         @keyup.enter="handleVerify"
       />
@@ -33,7 +33,7 @@
         :loading="isVerifying"
         @click="handleVerify"
       >
-        {{ isVerifying ? '验证中...' : '验证授权码' }}
+        {{ isVerifying ? $t('authorization.verifying') : $t('authorization.verify') }}
       </el-button>
     </template>
   </el-dialog>
@@ -66,7 +66,7 @@ async function checkStatus() {
 
 async function handleVerify() {
   if (!licenseKey.value.trim()) {
-    error.value = '请输入授权码'
+    error.value = window.t('authorization.error.empty')
     return
   }
 
@@ -78,10 +78,10 @@ async function handleVerify() {
     if (result.success) {
       emit('authorized')
     } else {
-      error.value = result.message || '授权失败'
+      error.value = result.message || window.t('authorization.error.failed')
     }
   } catch (err) {
-    error.value = err.message || '授权失败，请重试'
+    error.value = err.message || window.t('authorization.error.retry')
   } finally {
     isVerifying.value = false
   }
