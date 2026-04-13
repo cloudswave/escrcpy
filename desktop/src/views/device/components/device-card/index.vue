@@ -172,11 +172,11 @@ onBeforeUnmount(() => {
 
 function handleClick() {
   if (['offline', 'unauthorized'].includes(props.row.status)) return
-  emit('command', 'mirror')
+  emit('command', 'mirror', props.row)
 }
 
 function handleCommand(command) {
-  emit('command', command)
+  emit('command', command, props.row)
 }
 
 // 暴露方法供父组件调用
