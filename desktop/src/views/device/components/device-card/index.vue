@@ -4,105 +4,108 @@
     :class="{ 'opacity-60': row.status === 'offline' }"
     @click="handleClick"
   >
-    <!-- 设备预览图 -->
-    <div class="device-preview relative aspect-[9/16] bg-[--el-bg-color-page]">
-      <img
-        v-if="previewImage"
-        :src="previewImage"
-        :alt="row.id"
-        class="w-full h-full object-cover"
-        @error="previewImage = null"
-      />
-      <div v-else class="w-full h-full flex items-center justify-center text-[--el-text-color-placeholder]">
-        <el-icon :size="40"><Monitor /></el-icon>
-      </div>
-      
-      <!-- 状态标签 -->
-      <el-tag
-        class="absolute top-2 left-2"
-        :type="getDictLabel('deviceStatus', row.status, { labelKey: 'tagType' })"
-        size="small"
-      >
-        {{ $t(getDictLabel('deviceStatus', row.status)) || '-' }}
-      </el-tag>
-      
-      <!-- 更多按钮 -->
-      <el-dropdown
-        class="absolute top-2 right-2"
-        :hide-on-click="false"
-        trigger="click"
-        @command="handleCommand"
-        @click.stop
-      >
-        <el-button
-          type="primary"
-          text
-          :disabled="['unauthorized', 'offline'].includes(row.status)"
-          circle
-          size="small"
-          icon="More"
-          @click.stop
-        />
-        <template #dropdown>
-          <el-dropdown-menu>
-            <el-dropdown-item command="screenshot">
-              <el-icon><Camera /></el-icon>
-              {{ $t('device.control.screenshot') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="record">
-              <el-icon><VideoCamera /></el-icon>
-              {{ $t('device.actions.more.record.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="custom">
-              <el-icon><Setting /></el-icon>
-              {{ $t('device.actions.more.custom.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="install" divided>
-              <el-icon><FolderAdd /></el-icon>
-              {{ $t('device.control.install') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="explorer">
-              <el-icon><FolderOpened /></el-icon>
-              {{ $t('device.control.file.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="terminal">
-              <el-icon><Monitor /></el-icon>
-              {{ $t('device.terminal.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="camera" divided>
-              <el-icon><VideoPlay /></el-icon>
-              {{ $t('device.actions.more.camera.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="otg">
-              <el-icon><Connection /></el-icon>
-              {{ $t('device.actions.more.otg.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="reboot" divided>
-              <el-icon><RefreshRight /></el-icon>
-              {{ $t('device.control.reboot') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="rotation">
-              <el-icon><Refresh /></el-icon>
-              {{ $t('device.control.rotation.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="volume">
-              <el-icon><Microphone /></el-icon>
-              {{ $t('device.control.volume.name') }}
-            </el-dropdown-item>
-            <el-dropdown-item command="copilot" divided>
-              <el-icon><ChatDotRound /></el-icon>
-              {{ $t('device.control.copilot') }}
-            </el-dropdown-item>
-          </el-dropdown-menu>
-        </template>
-      </el-dropdown>
-      
-      <!-- 加载状态 -->
-      <div v-if="loading" class="absolute inset-0 bg-black/30 flex items-center justify-center">
-        <el-icon class="is-loading" :size="30" color="#fff"><Loading /></el-icon>
-      </div>
+    <!-- 设备背景截图 -->
+    <img
+      v-if="previewImage"
+      :src="previewImage"
+      :alt="row.id"
+      class="absolute inset-0 w-full h-full object-cover -z-10"
+      @error="previewImage = null"
+    />
+    <div
+      v-if="!previewImage"
+      class="absolute inset-0 flex items-center justify-center bg-[--el-bg-color-page] -z-10"
+    >
+      <el-icon :size="40"><Monitor /></el-icon>
     </div>
-    
+    <!-- 半透明遮罩 -->
+    <div class="absolute inset-0 bg-black/20 -z-10"></div>
+
+    <!-- 状态标签 -->
+    <el-tag
+      class="absolute top-2 left-2"
+      :type="getDictLabel('deviceStatus', row.status, { labelKey: 'tagType' })"
+      size="small"
+    >
+      {{ $t(getDictLabel('deviceStatus', row.status)) || '-' }}
+    </el-tag>
+
+    <!-- 更多按钮 -->
+    <el-dropdown
+      class="absolute top-2 right-2"
+      :hide-on-click="false"
+      trigger="click"
+      @command="handleCommand"
+      @click.stop
+    >
+      <el-button
+        type="primary"
+        text
+        :disabled="['unauthorized', 'offline'].includes(row.status)"
+        circle
+        size="small"
+        icon="More"
+        @click.stop
+      />
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item command="screenshot">
+            <el-icon><Camera /></el-icon>
+            {{ $t('device.control.screenshot') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="record">
+            <el-icon><VideoCamera /></el-icon>
+            {{ $t('device.actions.more.record.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="custom">
+            <el-icon><Setting /></el-icon>
+            {{ $t('device.actions.more.custom.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="install" divided>
+            <el-icon><FolderAdd /></el-icon>
+            {{ $t('device.control.install') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="explorer">
+            <el-icon><FolderOpened /></el-icon>
+            {{ $t('device.control.file.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="terminal">
+            <el-icon><Monitor /></el-icon>
+            {{ $t('device.terminal.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="camera" divided>
+            <el-icon><VideoPlay /></el-icon>
+            {{ $t('device.actions.more.camera.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="otg">
+            <el-icon><Connection /></el-icon>
+            {{ $t('device.actions.more.otg.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="reboot" divided>
+            <el-icon><RefreshRight /></el-icon>
+            {{ $t('device.control.reboot') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="rotation">
+            <el-icon><Refresh /></el-icon>
+            {{ $t('device.control.rotation.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="volume">
+            <el-icon><Microphone /></el-icon>
+            {{ $t('device.control.volume.name') }}
+          </el-dropdown-item>
+          <el-dropdown-item command="copilot" divided>
+            <el-icon><ChatDotRound /></el-icon>
+            {{ $t('device.control.copilot') }}
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+
+    <!-- 加载状态 -->
+    <div v-if="loading" class="absolute inset-0 bg-black/30 flex items-center justify-center">
+      <el-icon class="is-loading" :size="30" color="#fff"><Loading /></el-icon>
+    </div>
+
     <!-- 设备信息 -->
     <div class="device-info p-2 bg-[--el-bg-color]">
       <div class="flex items-center space-x-1">
@@ -139,13 +142,13 @@ const emit = defineEmits(['command'])
 
 const loading = ref(false)
 const previewImage = ref(null)
+
 const preferenceStore = usePreferenceStore()
 const deviceStore = useDeviceStore()
 
 // 获取设备预览图
 async function fetchPreview() {
   if (props.row.status !== 'device') return
-  
   try {
     const base64 = await window.$preload.adb.getScreenshot(props.row.id)
     if (base64) {
@@ -187,7 +190,7 @@ defineExpose({
     const args = preferenceStore.scrcpyParameter(props.row.id, {
       excludes: ['--otg', '--mouse=aoa', '--keyboard=aoa'],
     })
-    
+
     window.$scrcpy.mirror(props.row.id, {
       title: deviceStore.getLabel(props.row, 'mirror'),
       args,
